@@ -3,11 +3,16 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
+const authenticate = require('./middlewares/authenticate');
 const authRoute = require('./routes/authRoute');
 const userRoute = require('./routes/userRoute');
 const propertyRoute = require('./routes/propertyRoute');
 const notFoundMiddleware = require('./middlewares/notFound');
 const errorMiddleware = require('./middlewares/error');
+
+//sync db with model
+// const { sequelize } = require('./models');
+// sequelize.sync({ force: true })
 
 const app = express();
 // dev run morgan
@@ -20,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 
 app.use('/auth', authRoute);
-app.use('/users', userRoute);
+app.use('/users', authenticate, userRoute);
 app.use('/properties', propertyRoute);
 
 
