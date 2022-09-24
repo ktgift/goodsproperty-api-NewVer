@@ -13,7 +13,7 @@ const signToken = payload =>
 exports.register = async (req, res, next) => {
     try {
         const { firstname, lastname, email, password, confirmPassword, phoneNumber } = req.body;
-        
+        console.log(phoneNumber)
         //ถ้าไม่ส่งอะไรมา firstname === ''
         if(!firstname) {
             createError('firstname is required', 400);
@@ -41,7 +41,7 @@ exports.register = async (req, res, next) => {
 
         // แปลง phoneNumber to string
         const isPhoneNumber = validator.isMobilePhone(phoneNumber + '');
-        if (isPhoneNumber === false) {
+        if (!isPhoneNumber) {
             createError('phone number is invalid format', 400);
         }
 
@@ -53,7 +53,7 @@ exports.register = async (req, res, next) => {
             firstname, 
             lastname,
             email,
-            phoneNumber: isPhoneNumber,
+            phoneNumber: isPhoneNumber ? phoneNumber : null,
             password: hashPassword
         })
 
@@ -73,7 +73,7 @@ exports.login = async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({
-            where: {email}
+            where: {email : email}
         })
 
         //ถ้าไม่เจอจะเป็น null หรือ ''
@@ -91,6 +91,7 @@ exports.login = async (req, res, next) => {
         res.json({ token })
     } catch(err){
         next(err);
+        console.log(err)
     }
 }
 

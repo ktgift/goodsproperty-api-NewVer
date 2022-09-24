@@ -13,7 +13,7 @@ router.patch(
     // ]),
     userController.updateProfilePic
   );
-router.get('/:userId', userController.getUserById);
+router.get('/userlogin', userController.getUserlogin);
 router.put('/:userId', userController.updateUser);
 router.delete('/:userId', userController.deleteUser);
 
