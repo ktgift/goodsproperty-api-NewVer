@@ -7,6 +7,7 @@ const authenticate = require('./middlewares/authenticate');
 const authRoute = require('./routes/authRoute');
 const userRoute = require('./routes/userRoute');
 const propertyRoute = require('./routes/propertyRoute');
+const searchRoute = require('./routes/searchRoute');
 const notFoundMiddleware = require('./middlewares/notFound');
 const errorMiddleware = require('./middlewares/error');
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended:false }));
 app.use('/auth', authRoute);
 app.use('/users', authenticate, userRoute);
 app.use('/properties', propertyRoute);
+app.use('/searchDatas', searchRoute);
 
 
 app.use(notFoundMiddleware);

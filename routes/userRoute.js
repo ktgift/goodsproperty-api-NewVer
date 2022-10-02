@@ -16,6 +16,8 @@ router.patch(
 router.get('/userlogin', userController.getUserlogin);
 router.put('/:userId', userController.updateUser);
 router.delete('/:userId', userController.deleteUser);
+// สำหรับ get post where userId
+router.get('/:userId', userController.getPropertyPost); 
 
-
+ 
 module.exports = router;

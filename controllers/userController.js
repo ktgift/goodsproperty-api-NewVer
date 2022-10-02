@@ -34,3 +34,13 @@ exports.deleteUser = async (req, res, next) => {
 
     }
 }
+
+exports.getPropertyPost = async (req, res, next) => {
+    try {
+
+    } catch(err){
+
+    }
+}
+
+
